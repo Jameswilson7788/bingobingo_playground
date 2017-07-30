@@ -26,26 +26,8 @@ class PageParser:
     def _generate_bingobingo_from_row(self, row):
         bingobingo = BingoBingo()
         bingobingo.identity = row[0]
-        bingobingo.number1 = row[1]
-        bingobingo.number2 = row[2]
-        bingobingo.number3 = row[3]
-        bingobingo.number4 = row[4]
-        bingobingo.number5 = row[5]
-        bingobingo.number6 = row[6]
-        bingobingo.number7 = row[7]
-        bingobingo.number8 = row[8]
-        bingobingo.number9 = row[9]
-        bingobingo.number10 = row[10]
-        bingobingo.number11 = row[11]
-        bingobingo.number12 = row[12]
-        bingobingo.number13 = row[13]
-        bingobingo.number14 = row[14]
-        bingobingo.number15 = row[15]
-        bingobingo.number16 = row[16]
-        bingobingo.number17 = row[17]
-        bingobingo.number18 = row[18]
-        bingobingo.number19 = row[19]
-        bingobingo.number20 = row[20]
+        for number in row[1:]:
+            bingobingo.numbers[int(number)] = True
         return bingobingo
 
 
