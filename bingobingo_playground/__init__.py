@@ -30,12 +30,13 @@ def predict_hangod():
 
 def fetch_bingobingo_to_database():
     session = Session()
+    session_for_query = Session()
     pg = PageGetter()
     recent_bingo_content = pg.get()
     pp = PageParser()
     list_bingobingo = pp.parse(recent_bingo_content)
     while list_bingobingo:
-        added = [session.add(bingobingo) for bingobingo in list_bingobingo if session.query(BingoBingo).filter(BingoBingo.identity == bingobingo.identity).one_or_none() is None]
+        added = [session.add(bingobingo) for bingobingo in list_bingobingo if session_for_query.query(BingoBingo).filter(BingoBingo.identity == bingobingo.identity).one_or_none() is None]
         if not added:
             break
         pg.go_previous()
