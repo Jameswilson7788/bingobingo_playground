@@ -14,4 +14,5 @@ def get_trained_clf(features, labels):
 def prepare_hangod_features_labels(bingobingo_dataframe):
     features = bingobingo_dataframe.drop(['number54'], axis=1).drop(0)
     labels = bingobingo_dataframe['number54'][:-1]
-    return features, labels
+    newest_feature = bingobingo_dataframe.drop(['number54'], axis=1)[:1]
+    return features, labels, newest_feature
