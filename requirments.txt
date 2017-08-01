@@ -1,5 +1,5 @@
 pandas
-sklearn
+scikit-learn
 sqlalchemy
 beautifulsoup4
 gunicorn
