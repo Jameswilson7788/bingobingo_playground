@@ -2,3 +2,5 @@ pandas
 sklearn
 sqlalchemy
 beautifulsoup4
+gunicorn
+flask

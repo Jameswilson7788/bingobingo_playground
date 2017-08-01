@@ -1,5 +1,5 @@
 #coding: utf-8
-from sklearn.ensemble import AdaBoostClassifier
+from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 
 def prepare_train_test_data(features, labels):
@@ -7,7 +7,7 @@ def prepare_train_test_data(features, labels):
     return x_train, x_test, y_train, y_test
 
 def get_trained_clf(features, labels):
-    clf = AdaBoostClassifier()
+    clf = SVC()
     clf.fit(features, labels)
     return clf
 

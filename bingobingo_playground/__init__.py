@@ -7,8 +7,7 @@ from bingobingo_playground.pageparser import PageParser
 from bingobingo_playground import data
 from bingobingo_playground import hangod_predict
 
-def predict_hangod():
-    # read bingobingo data from database
+def test_hangod():
     session = Session()
     list_bingobingo = list(session.query(BingoBingo).order_by(BingoBingo.identity.desc()))
     df = data.prepare_dataframe(list_bingobingo)
@@ -19,7 +18,9 @@ def predict_hangod():
     print('score:', clf.score(x_test, y_test))
     cm = confusion_matrix(pred, y_test)
     print(cm)
-    print(int(newest_feature['identity']) + 1, ':', clf.predict(newest_feature))
+    newest_pred_identity = int(newest_feature['identity']) + 1
+    newest_pred = clf.predict(newest_feature)
+    print(newest_pred_identity, ':', newest_pred)
     # plot
     plt.imshow(cm, cmap=plt.cm.Blues)
     tick_marks = range(2)
@@ -27,6 +28,18 @@ def predict_hangod():
     plt.xticks(tick_marks, classes, rotation=45)
     plt.yticks(tick_marks, classes)
     plt.show()
+
+def predict_hangod():
+    # read bingobingo data from database
+    session = Session()
+    list_bingobingo = list(session.query(BingoBingo).order_by(BingoBingo.identity.desc()))
+    df = data.prepare_dataframe(list_bingobingo)
+    features, labels, newest_feature = hangod_predict.prepare_hangod_features_labels(df)
+    clf = hangod_predict.get_trained_clf(features, labels)
+    newest_pred_identity = int(newest_feature['identity']) + 1
+    newest_pred = clf.predict(newest_feature)
+    print(newest_pred_identity, ':', newest_pred)
+    return (newest_pred_identity, newest_pred)
 
 def fetch_bingobingo_to_database():
     session = Session()
