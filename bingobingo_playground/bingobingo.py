@@ -26,4 +26,4 @@ class BingoBingo(Base):
     def __repr__(self):
         return "<BingoBingo(identity={}, numbers={})>".format(self.identity, self.numbers)
 
-Base.metadata.create_all(engine)
+Base.metadata.create_all(engine, checkfirst=True)
