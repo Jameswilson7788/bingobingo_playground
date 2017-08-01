@@ -1,6 +1,10 @@
 # coding: utf-8
 import pandas as pd
 
+def prepare_feature_labels(dataframe, target_number):
+    labels = dataframe['number{}'.format(target_number)][:-1]
+    features = dataframe.drop(0)
+    return features, labels
 
 def prepare_dataframe(list_bingobingo):
     """Prepare data for hangod prediction.

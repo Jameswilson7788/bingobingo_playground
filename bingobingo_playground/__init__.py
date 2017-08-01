@@ -50,10 +50,12 @@ def fetch_bingobingo_to_database():
     list_bingobingo = pp.parse(recent_bingo_content)
     while list_bingobingo:
         added = [session.add(bingobingo) for bingobingo in list_bingobingo if session_for_query.query(BingoBingo).filter(BingoBingo.identity == bingobingo.identity).one_or_none() is None]
+        print (added)
         if not added:
             break
         pg.go_previous()
         older_bingo_content = pg.get()
+        print(older_bingo_content)
         list_bingobingo = pp.parse(older_bingo_content)
     session.commit()
 
