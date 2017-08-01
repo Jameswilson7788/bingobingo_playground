@@ -1,5 +1,4 @@
 #coding: utf-8
-import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from bingobingo_playground.bingobingo import Session, BingoBingo
 from bingobingo_playground.pagegetter import PageGetter
@@ -8,6 +7,7 @@ from bingobingo_playground import data
 from bingobingo_playground import hangod_predict
 
 def test_hangod():
+    import matplotlib.pyplot as plt
     session = Session()
     list_bingobingo = list(session.query(BingoBingo).order_by(BingoBingo.identity.desc()))
     df = data.prepare_dataframe(list_bingobingo)
