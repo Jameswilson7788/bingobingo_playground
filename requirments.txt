@@ -4,3 +4,4 @@ sqlalchemy
 beautifulsoup4
 gunicorn
 flask
+matplotlib
