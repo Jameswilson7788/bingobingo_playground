@@ -1,9 +1,8 @@
 from flask import Flask, jsonify
 from bingobingo_playground import fetch_bingobingo_to_database, predict_hangod
 app = Flask(__name__)
-app.debug = True
 
-@app.route('/predict')
+@app.route('/predict_hangod')
 def predict():
     newest_identity, newest_pred = predict_hangod()
     return jsonify(response="OK",
