@@ -7,3 +7,4 @@ flask
 matplotlib
 numpy
 scipy
+requests
