@@ -1,9 +1,12 @@
 # coding: utf-8
 import pandas as pd
+from bingobingo_playground.data.features_transformer import FeaturesTransformer
 
 def prepare_feature_labels(dataframe, target_number):
-    labels = dataframe['number{}'.format(target_number)][:-1]
-    features = dataframe.drop(0)
+    transformer = FeaturesTransformer(predict_number=target_number)
+    df = transformer.transform(dataframe)
+    features = df.drop('target', axis=1)
+    labels = df['target']
     return features, labels
 
 def prepare_dataframe(list_bingobingo):
@@ -32,4 +35,4 @@ if __name__ == '__main__':
     content = g1.get()
     p1 = PageParser()
     l_bingobingo = p1.parse(content)
-    result = prepare_hangod_data(l_bingobingo)
+    result = prepare_dataframe(l_bingobingo)
