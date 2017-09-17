@@ -21,7 +21,7 @@ class FeaturesTransformer(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         labels = X[['number{}'.format(self.predict_number)]][:-1]
         labels.columns = ['target']
-        features = X.drop(0)
+        features = X.drop(0).reset_index(drop=True)
         return features.join(labels)
 
 

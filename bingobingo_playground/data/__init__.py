@@ -1,5 +1,6 @@
 # coding: utf-8
 import pandas as pd
+from sklearn.model_selection import StratifiedShuffleSplit
 from bingobingo_playground.data.features_transformer import FeaturesTransformer
 
 def prepare_feature_labels(dataframe, target_number):
@@ -8,6 +9,13 @@ def prepare_feature_labels(dataframe, target_number):
     features = df.drop('target', axis=1)
     labels = df['target']
     return features, labels
+
+def prepare_train_test_set(features, labels):
+    split = StratifiedShuffleSplit()
+    for train_index, test_index in split.split(features, labels):
+        x_train, y_train = features.loc[train_index], labels.loc[train_index]
+        x_test, y_test = features.loc[test_index], labels.loc[test_index]
+    return x_train, x_test, y_train, y_test
 
 def prepare_dataframe(list_bingobingo):
     """Prepare data for hangod prediction.

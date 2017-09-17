@@ -12,7 +12,7 @@ def test_hangod():
     list_bingobingo = list(session.query(BingoBingo).order_by(BingoBingo.identity.desc()))
     df = data.prepare_dataframe(list_bingobingo)
     features, labels, newest_feature = hangod_predict.prepare_hangod_features_labels(df)
-    x_train, x_test, y_train, y_test = hangod_predict.prepare_train_test_data(features, labels)
+    x_train, x_test, y_train, y_test = data.prepare_train_test_set(features, labels)
     clf = hangod_predict.get_trained_clf(x_train, y_train)
     pred = clf.predict(x_test)
     print('score:', clf.score(x_test, y_test))
@@ -62,4 +62,4 @@ def fetch_bingobingo_to_database():
 
 if __name__ == '__main__':
     fetch_bingobingo_to_database()
-    predict_hangod()
+    test_hangod()
